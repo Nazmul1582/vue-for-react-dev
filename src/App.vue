@@ -4,6 +4,7 @@
 
     const product = ref("Socks")
     const image = ref(greenSocks)
+    const inStock = ref(true)
 
 </script>
 
@@ -16,6 +17,8 @@
                 </div>                
                 <div class="product-info">
                     <h1>{{ product }}</h1>
+                    <p v-if="inStock">In Stock</p>
+                    <p v-else>Out of Stock</p>
                 </div>
             </div>
         </div>
