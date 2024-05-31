@@ -4,7 +4,8 @@
 
     const product = ref("Socks")
     const image = ref(greenSocks)
-    const inventory = ref(5)
+    const inStock = ref(true)
+    const details = ref([ "50% cotton", "30% wool", "20% polyster" ])
 
 </script>
 
@@ -17,9 +18,11 @@
                 </div>                
                 <div class="product-info">
                     <h1>{{ product }}</h1>
-                    <p v-if="inventory >= 10">In Stock</p>
-                    <p v-else-if="inventory < 10 && inventory > 0">Almost sold out!</p>
+                    <p v-if="inStock">In Stock</p>
                     <p v-else>Out of Stock</p>
+                    <ul>
+                        <li v-for="(detail, index) in details" :key="index">{{ detail }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
