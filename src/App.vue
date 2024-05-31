@@ -1,47 +1,103 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+    import { ref } from 'vue';
+
+    const product = ref("Socks")
+
+    // setTimeout(() => {
+    //     product.value = "New Socks"
+    // }, 1000)
+    // created a composable
+    const useChangeWithDelay = function(state, newVal, delay) {
+        setTimeout(() => {
+            state.value = newVal;
+        }, delay)
+    }
+    useChangeWithDelay(product, "New Socks", 1000)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <h1>{{ product }}</h1>
 
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<!-- ============== Reactive ================ -->
+<!-- another way to create state in vue: reactive() -->
+<!-- If you have a bunch of related data they usually go together, you can you reactive -->
+<!-- <script setup>
+    import { reactive } from 'vue';
+
+    const product = reactive({
+        name: "Socks"
+    })
+
+    setTimeout(() =>{
+        product.name = "New Socks"
+    }, 1000)
+</script>
+
+<template>
+    <h1>{{ product.name }}</h1>
+</template> -->
+
+<!-- ================  Composition API(script setup) ================ -->
+<!-- Composition API with the script setup(latest syntax) -->
+<!-- Composition API (script setup) is vue.js equivalent of React Hooks -->
+<!-- Using composition api, we can create custom hooks. But in Vue.js worlds, we call them Composables -->
+<!-- <script setup>
+import { ref } from 'vue'
+const product = ref("Socks")
+
+setTimeout(() => {
+    product.value = "New Socks"
+}, 1000)
+
+</script>
+
+<template>
+    <h1> {{ product }} </h1>
+</template> -->
+
+
+<!-- =============== Composition API (classic) =============== -->
+<!-- classic composition api syntax -->
+<!-- <script>
+import { ref } from 'vue';
+export default {
+    setup() {
+        const product = ref("Socks")
+
+        setTimeout(() => {
+            product.value = "New Socks"
+        }, 1000)
+
+        return { product }
+    }
 }
+</script>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+<template>
+    <h1>{{ product }}</h1>
+</template> -->
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+<!-- =================== Options API ============== -->
+<!-- Options API is the vue.js equivalent of React's class-based API -->
+<!-- <script>
+    export default{
+        data() {
+            return {
+                product: "Socks"
+            }
+        },
+        created() {
+            setTimeout(() => {
+                this.product = "New Socks"
+            }, 1000)
+        }
+    }
+</script>
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<template>
+    <h1>{{ product }}</h1>
+</template> -->
