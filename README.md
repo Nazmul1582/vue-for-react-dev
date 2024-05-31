@@ -11,7 +11,7 @@
 	- [Reactive](#reactive)
 	- [Other Script Syntax](#other-script-syntax)
 	- [Custom Hook](#custom-hook)
-	
+- [Template Basics](#template-basics)
 - [Recommended IDE Setup](#recommended-ide-setup)
 
 ## Vue and React are similar & different
@@ -305,6 +305,18 @@ We're using the "use" prefix to name the composable just like the naming convent
 
 <hr>
 
+
+## Template Basics
+
+The most common operations which are used in the `<template>`
+
+- Attribute Binding
+- Conditional Rendering
+- List Rendering
+- List Rendering with Conditional
+
+
+<hr>
 
 
 ## Recommended IDE Setup

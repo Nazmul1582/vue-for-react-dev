@@ -1,24 +1,25 @@
 <script setup>
     import { ref } from 'vue';
+    import greenSocks from './assets/images/socks_green.jpeg';
 
     const product = ref("Socks")
+    const image = ref(greenSocks)
 
-    // setTimeout(() => {
-    //     product.value = "New Socks"
-    // }, 1000)
-    // created a composable
-    const useChangeWithDelay = function(state, newVal, delay) {
-        setTimeout(() => {
-            state.value = newVal;
-        }, delay)
-    }
-    useChangeWithDelay(product, "New Socks", 1000)
 </script>
 
 <template>
-
-    <h1>{{ product }}</h1>
-
+    <div class="nav-bar">
+        <div class="product-display">
+            <div class="product-container">
+                <div class="product-image">
+                    <img v-bind:src="image" alt="">
+                </div>                
+                <div class="product-info">
+                    <h1>{{ product }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <!-- ============== Reactive ================ -->
