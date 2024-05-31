@@ -12,6 +12,7 @@
 	- [Other Script Syntax](#other-script-syntax)
 	- [Custom Hook](#custom-hook)
 - [Template Basics](#template-basics)
+- [Event Handling](#event-handling)
 - [Recommended IDE Setup](#recommended-ide-setup)
 
 ## Vue and React are similar & different
@@ -314,6 +315,23 @@ The most common operations which are used in the `<template>`
 - Conditional Rendering
 - List Rendering
 - List Rendering with Conditional
+
+
+<hr>
+
+
+## Event Handling
+
+event handling using `v-on` or `@` directive.
+
+Here some event modifiers:
+
+| Event Modifiers | | Description  |
+| :-------- | ---------- | -------|
+| @click.once | | Make sure the event can be triggered **only once** on the same element. |
+| @click.prevent | | Prevents default native, like **event.preventDefault()** in React. |
+| @click.stop | | Stops the event from propagating further up. |
+| @keydown.enter | | Tergets the 'Enter' key's keydown event. |
 
 
 <hr>

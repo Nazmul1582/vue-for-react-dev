@@ -1,20 +1,26 @@
 <script setup>
     import { ref } from 'vue';
-    import greenSocks from './assets/images/socks_green.jpeg';
+    import greenSocksImage from './assets/images/socks_green.jpeg';
+    import blueSocksImage from './assets/images/socks_blue.jpeg';
 
     const product = ref("Socks")
-    const image = ref(greenSocks)
+    const image = ref(greenSocksImage)
     const inStock = ref(true)
     const details = ref([ "50% cotton", "30% wool", "20% polyster" ])
     const variants = ref([
-        { id: 2234, color: "green" },
-        { id: 2235, color: "blue" }
+        { id: 2234, color: "green", image: greenSocksImage },
+        { id: 2235, color: "blue", image: blueSocksImage }
     ])
+    const cart = ref(0)
+    
+    const addToCart = () => cart.value += 1;
+    const updateImage = (selectedImage) => image.value = selectedImage;
 
 </script>
 
 <template>
     <div class="nav-bar">
+        <div class="cart">cart({{ cart }})</div>
         <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
@@ -27,7 +33,11 @@
                     <ul>
                         <li v-for="(detail, index) in details" :key="index">{{ detail }}</li>
                     </ul>
-                    <div v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
+                    <div v-on:mouseover="updateImage(variant.image)" v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
+                    <!-- optional function wrapper
+                    <button class="button" v-on:click="(event) =>{ cart += 1 }">Add to cart</button> -->
+                    <!-- <button v-on:click="cart += 1" class="button">Add to cart</button> -->
+                    <button class="button" @click="addToCart">Add to cart</button>
                 </div>
             </div>
         </div>
