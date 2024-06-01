@@ -1,18 +1,19 @@
 # Vue Js for React Developers
 
-
 **Table of content**
+
 - [Vue and React are Similar and different](#vue-and-react-are-similar--different)
 - [Creating a component](#creating-a-component)
-	- [The Structure of a Single-File Component](#the-structure-of-a-single-file-component)
-	- [ref: Vue's version of "useState"](#ref-vues-version-of-usestate)
-	- [The Double-Curly Braces](#the-double-curly-braces)
-	- [Value: Vue’s version of “state” and “setState”](#value-vues-version-of-state-and-setstate)
-	- [Reactive](#reactive)
-	- [Other Script Syntax](#other-script-syntax)
-	- [Custom Hook](#custom-hook)
+  - [The Structure of a Single-File Component](#the-structure-of-a-single-file-component)
+  - [ref: Vue's version of "useState"](#ref-vues-version-of-usestate)
+  - [The Double-Curly Braces](#the-double-curly-braces)
+  - [Value: Vue’s version of “state” and “setState”](#value-vues-version-of-state-and-setstate)
+  - [Reactive](#reactive)
+  - [Other Script Syntax](#other-script-syntax)
+  - [Custom Hook](#custom-hook)
 - [Template Basics](#template-basics)
 - [Event Handling](#event-handling)
+- [Dynamic & Scoped Style](#dynamic-and-scoped-style)
 - [Recommended IDE Setup](#recommended-ide-setup)
 
 ## Vue and React are similar & different
@@ -23,12 +24,10 @@ Vue and React are very similar because they solve the same problem:
 - with stateful components
 - powered by VDOM
 
-
 This two technology are also very different because they solve the problem in different way.
 
 - React: Minimalist library-style approach
 - Vue: Full fledged framwork-style approach
-
 
 **Similarities**
 
@@ -44,12 +43,10 @@ This two technology are also very different because they solve the problem in di
 - Two-Way Data Binding
 - Lifecycle Hooks
 
-
 <hr>
-
+<br>
 
 ## Creating a component
-
 
 ### Some Prep Work
 
@@ -58,7 +55,6 @@ In this lesson, we’re finally going to write some Vue code.
 Let’s first remove all the default files in the `src/components` folder.
 
 Also remove all the code inside the `src/App.vue` file. We’re going to create our first Vue.js component from scratch.
-
 
 ### The Structure of a Single-File Component:
 
@@ -76,7 +72,6 @@ Similar to a React component, there are two distinct parts of a Vue component. T
 
 To use the latest syntax in `<script>`, we have to add the `setup` attribute. (I’ll explain the syntactical differences between the new and old later in the lesson)
 
-
 **src/App.vue**
 
 ```html
@@ -86,15 +81,12 @@ To use the latest syntax in `<script>`, we have to add the `setup` attribute. (I
 
 we're going to put all the components logic in the `<script>` section and put the template code in the `<template>` section.
 
-
 ### ref: Vue's version of "useState"
 
 ```javascript
 <script setup>
-
-import { ref } from "vue"
+import {ref} from "vue";
 const product = ref("Socks");
-
 </script>
 ```
 
@@ -105,12 +97,10 @@ const product = ref("Socks");
 For example, a variable with a string value:
 
 ```javascript
-
-let product = "Socks"
-
+let product = "Socks";
 ```
 
-If we are using the variable as a state,  changing it means reassigning it:
+If we are using the variable as a state, changing it means reassigning it:
 
 ```javascript
 
@@ -120,7 +110,7 @@ product = “New Socks”
 
 The problem is that the original value shocks would be lost after the reassignment if the original value is lost reactivity is lost as well.
 
- views way of getting around this problem is to wrap the value in an object with `ref` 
+views way of getting around this problem is to wrap the value in an object with `ref`
 
 ```JavaScript
 
@@ -136,17 +126,15 @@ Now to render this `ref` state, We will use the double curly braces in the templ
 
 ```javascript
 <template>
-	<h1>{{ product }}</h1>
+  <h1>{{ product }}</h1>
 </template>
 ```
 
 So whenever `product` is changed the `h1` will be updated with its new value if you check the browser you should see `Socks`
 
-
 ### The Double-Curly Braces
 
 The double curly braces are similar to react single curly braces with JSX. Technically they put any JavaScript expression inside them. it doesn't have to be variable.
-
 
 ### Value: Vue’s version of “state” and “setState”
 
@@ -160,10 +148,9 @@ setTimeout(() => {
 }, 1000)
 ```
 
-The `value` Property is used for both read and write. So it's the *Vue.js equivalent of state and setState*.
+The `value` Property is used for both read and write. So it's the _Vue.js equivalent of state and setState_.
 
 In the example here, we are assigning `value` to a new string to change the state. In the browser, you should see the value changing after the one-second time out. But in the `<template>` you don't have to use the `value` property because it will be added for you automatically.
-
 
 ### Reactive
 
@@ -190,22 +177,18 @@ The main difference is that you don't have to use the value property to access t
 **src/App.vue**
 
 ```javascript
-
 setTimeout(() => {
-	product.name = "New Socks"
-}, 1000)
-
+  product.name = "New Socks";
+}, 1000);
 ```
 
-We use `ref()` or `reactive()`, it all depends on your need. if you just need a state for a simple value, then `ref()` should be fine. if you have a bunch of related that usually go together you might want to put them in the same object using `reactive()`. 
-
+We use `ref()` or `reactive()`, it all depends on your need. if you just need a state for a simple value, then `ref()` should be fine. if you have a bunch of related that usually go together you might want to put them in the same object using `reactive()`.
 
 ### Other script syntax
 
- as I mentioned previously using the `setup` attribute on the `<script>` tag means where using the latest Syntax for the component script.
+as I mentioned previously using the `setup` attribute on the `<script>` tag means where using the latest Syntax for the component script.
 
 This is called the **Composition API** with the `script setup` syntax:
-
 
 ```javascript
 
@@ -226,7 +209,7 @@ setTimeout(() => {
 
 ```
 
-The above is basically a simplified Syntax on the Classic composition API syntax**:** 
+The above is basically a simplified Syntax on the Classic composition API syntax**:**
 
 ```javascript
 <script>
@@ -251,10 +234,10 @@ export default {
 ```
 
 As you can see this is tedious to read/write. that's why we are using the `script setup` Syntax instead.
- 
+
 So from now on I am going to refer to the script setup Syntax as a composition text
 
- in contrast to the composition API, there is the **Options API**. it's yet another way for constructing the component logic
+in contrast to the composition API, there is the **Options API**. it's yet another way for constructing the component logic
 
 ```javascript
 <script>
@@ -272,11 +255,10 @@ So from now on I am going to refer to the script setup Syntax as a composition t
 	}
 </script>
 
-<template> 
+<template>
 	<h1> {{ product }} </h1>
 </template>
 ```
-
 
 ### Custom Hook
 
@@ -284,28 +266,27 @@ You can think of the **Composition API** as the Vue.js equivalent of React Hooks
 
 You can think of the **Options API** as the wages equivalent of React’s class-based API.
 
-That means using the Composition API, we can create custom hooks. But in the Vue.js worlds, We call them *composables* it's the same concept if you have created custom hooks in React, This should feel right at home
+That means using the Composition API, we can create custom hooks. But in the Vue.js worlds, We call them _composables_ it's the same concept if you have created custom hooks in React, This should feel right at home
 
 **src/App.vue**
 
 ```javascript
 // a composable that changes the value after a specified delay
 const useChangeWithDelay = function (state, newVal, delay) {
-	setTimeout(() => {
-		state.value = newVal;
-	}, delay)
-}
+  setTimeout(() => {
+    state.value = newVal;
+  }, delay);
+};
 
-const product = "Socks"
+const product = "Socks";
 
-useChangeWithDelay(product, "New Socks", 1000)
+useChangeWithDelay(product, "New Socks", 1000);
 ```
 
 We're using the "use" prefix to name the composable just like the naming convention of a React hook.
 
-
 <hr>
-
+<br>
 
 ## Template Basics
 
@@ -316,9 +297,8 @@ The most common operations which are used in the `<template>`
 - List Rendering
 - List Rendering with Conditional
 
-
 <hr>
-
+<br>
 
 ## Event Handling
 
@@ -326,16 +306,93 @@ event handling using `v-on` or `@` directive.
 
 Here some event modifiers:
 
-| Event Modifiers | | Description  |
-| :-------- | ---------- | -------|
-| @click.once | | Make sure the event can be triggered **only once** on the same element. |
-| @click.prevent | | Prevents default native, like **event.preventDefault()** in React. |
-| @click.stop | | Stops the event from propagating further up. |
-| @keydown.enter | | Tergets the 'Enter' key's keydown event. |
-
+| Event Modifiers | Description                                                             |
+| :-------------- | ----------------------------------------------------------------------- |
+| @click.once     | Make sure the event can be triggered **only once** on the same element. |
+| @click.prevent  | Prevents default native, like **event.preventDefault()** in React.      |
+| @click.stop     | Stops the event from propagating further up.                            |
+| @keydown.enter  | Tergets the 'Enter' key's keydown event.                                |
 
 <hr>
+<br>
 
+## Dynamic and Scoped Style
+
+```javascript
+
+// class binding
+<div :class="{activeClass : isActive}"></div>
+
+// class binding: multiple classes
+<div class="circle-color" :class="{className : isActive}"></div>
+<div class="[color bgColor borderStyle]"></div>
+
+// class binding: ternary operators
+<div :class="[isActive ? 'isActive' : '']"></div>
+
+// class binding
+<div :class="!inStock ? 'disabledButton' : ''"></div>
+
+// Camelcased property name in style object
+<div :style="{backgroundColor: variant.color}"></div>
+
+// kebab-cased property name in style object
+<div :style="{'background-color': variant.color}"></div>
+
+// style binding: object (index.html)
+<div :style="styles"></div>
+// (main.js)
+data(){
+  return{
+    styles: {
+      fontSize: '20px',
+      color: 'red',
+    }
+  }
+}
+
+
+```
+
+The style tag is just simple, you just put css in it and it works. To make it even more useful, you can use the `scoped` attribute:
+
+**src/App.vue**
+
+```javascript
+<script>
+	import ChildComponent from './components/ChildComponent.vue';
+</script>
+
+<template>
+	<ChildComponent />
+</template>
+
+<style scoped>
+	p{
+		border: 2px solid red;
+	}
+</style>
+```
+
+**src/components/ChildComponent.vue**
+
+```javascript
+<script>
+
+</script>
+
+<template>
+	<p>
+		<p>Hello</p>
+		<p>World</p>
+	</p>
+</template>
+```
+
+Now, the css will be scoped to only the current component and not affect its child components, except the root element of child component. Here, Only the top-most `<p>` element of the child component will be affected by the red border style.
+
+<hr>
+<br>
 
 ## Recommended IDE Setup
 

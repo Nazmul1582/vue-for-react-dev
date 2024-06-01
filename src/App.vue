@@ -5,11 +5,11 @@
 
     const product = ref("Socks")
     const image = ref(greenSocksImage)
-    const inStock = ref(true)
+    const inStock = ref(false)
     const details = ref([ "50% cotton", "30% wool", "20% polyster" ])
     const variants = ref([
-        { id: 2234, color: "green", image: greenSocksImage },
-        { id: 2235, color: "blue", image: blueSocksImage }
+        { id: 2234, color: "green", image: greenSocksImage, quantity: 50 },
+        { id: 2235, color: "blue", image: blueSocksImage, quantity: 0 }
     ])
     const cart = ref(0)
     
@@ -33,11 +33,21 @@
                     <ul>
                         <li v-for="(detail, index) in details" :key="index">{{ detail }}</li>
                     </ul>
-                    <div v-on:mouseover="updateImage(variant.image)" v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
+                    <div 
+                        v-on:mouseover="updateImage(variant.image)" 
+                        v-for="variant in variants" :key="variant.id" 
+                        class="color-circle"
+                        :style="{backgroundColor: variant.color}"
+                    ></div>
                     <!-- optional function wrapper
                     <button class="button" v-on:click="(event) =>{ cart += 1 }">Add to cart</button> -->
                     <!-- <button v-on:click="cart += 1" class="button">Add to cart</button> -->
-                    <button class="button" @click="addToCart">Add to cart</button>
+                    <button 
+                        class="button" 
+                        :class="{ disabledButton : !inStock }"
+                        :disabled="!inStock"
+                        @click="addToCart"
+                    >Add to cart</button>
                 </div>
             </div>
         </div>
