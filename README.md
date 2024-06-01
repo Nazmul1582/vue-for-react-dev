@@ -14,6 +14,7 @@
 - [Template Basics](#template-basics)
 - [Event Handling](#event-handling)
 - [Dynamic & Scoped Style](#dynamic-and-scoped-style)
+- [The Fundamental Difference between Vue and React](#the-fundamental-difference-between-vue-and-react)
 - [Recommended IDE Setup](#recommended-ide-setup)
 
 ## Vue and React are similar & different
@@ -390,6 +391,41 @@ The style tag is just simple, you just put css in it and it works. To make it ev
 ```
 
 Now, the css will be scoped to only the current component and not affect its child components, except the root element of child component. Here, Only the top-most `<p>` element of the child component will be affected by the red border style.
+
+<hr>
+<br>
+
+## The Fundamental Difference between Vue and React
+
+Vue is using `ref` while React is using `useState`. These functions are basically the same thing but just with different names and syntax. But in terms of runtime execution, they are very different. 
+The code inside a React component will get executed again and again as part of the reactive progress.
+
+```javascript
+import { useState } from 'react'
+
+export default function() {
+	const [count, setCount] = useState();
+	console.log("This will be logged many times.")
+	
+	return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+But on the other hand, the Vue.js script block only runs once.
+
+```javascript
+<script setup>
+import { ref } from 'vue'
+
+const count = ref(0);
+console.log("This will be logged only once.")
+</script>
+<template>
+	<button @click="() => count++">{{ count }}</button>
+</template>
+```
+That's because the Vue.js Framework was implemented differently, notably with the observer pattern.
+
+A Vue.js state is basically an object that can be subscribed to. And the subscriber will get notified whenever a state change occurs. For example, The template of the component is an implicit subscriber of the state in the same component. That's why when a state is changed, the template will re-run itself. And that's why the `<script>` doesn't need to be run again and again.
 
 <hr>
 <br>
