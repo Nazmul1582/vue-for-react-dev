@@ -14,7 +14,9 @@
 - [Template Basics](#template-basics)
 - [Event Handling](#event-handling)
 - [Dynamic & Scoped Style](#dynamic-and-scoped-style)
+
 - [The Fundamental Difference between Vue and React](#the-fundamental-difference-between-vue-and-react)
+- [Computed Properties](#computed-properties)
 - [Recommended IDE Setup](#recommended-ide-setup)
 
 ## Vue and React are similar & different
@@ -426,6 +428,20 @@ console.log("This will be logged only once.")
 That's because the Vue.js Framework was implemented differently, notably with the observer pattern.
 
 A Vue.js state is basically an object that can be subscribed to. And the subscriber will get notified whenever a state change occurs. For example, The template of the component is an implicit subscriber of the state in the same component. That's why when a state is changed, the template will re-run itself. And that's why the `<script>` doesn't need to be run again and again.
+
+<hr>
+<br>
+
+
+## Computed Properties
+
+Computed property would be an example of explicit subscriber. 
+
+The `computed` function takes a callback as a argument. Inside the function, we're returning a new string based off the values of our `brand` and `product`. This will become the value of the computed property.
+
+And from now on, whenever `brand` or `product` is changed, the value of `title` will get recalculated automatically.
+
+This is different from React's approach, where the entire component function would get executed every time something is changed. In Vue.js, only the callback of the computed property would get re-executed.
 
 <hr>
 <br>
