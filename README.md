@@ -17,6 +17,7 @@
 
 - [The Fundamental Difference between Vue and React](#the-fundamental-difference-between-vue-and-react)
 - [Computed Properties](#computed-properties)
+	- [Other functions: watch and watchEffect](#other-functions)
 - [Recommended IDE Setup](#recommended-ide-setup)
 
 ## Vue and React are similar & different
@@ -442,6 +443,46 @@ The `computed` function takes a callback as a argument. Inside the function, we'
 And from now on, whenever `brand` or `product` is changed, the value of `title` will get recalculated automatically.
 
 This is different from React's approach, where the entire component function would get executed every time something is changed. In Vue.js, only the callback of the computed property would get re-executed.
+
+The `computed` function is a part of Vue 3 Composition API, so you can also use it inside a composable
+
+### Other functions
+
+The composition API also provides a few other useful functions for *reacting to state changes*, such as `watch` and `watchEffect`.
+
+**watch**
+The `watch` function can help you to run a callback whenever a particular state is changed
+
+```javascript
+import { ref, watch } from 'vue'
+
+const count = ref(0);
+
+watch(count, () => {
+	// do something when count is changed
+})
+```
+
+There's no need to return anything from this callback function.
+
+**watchEffect**
+
+`watchEffect` is similar to `watch`, but you don't have to specify what to watch. Any *subcribable* object that appears inside the callback will be subscribed to automatically. This is useful for subscribing to multiple states, and you don't want to manually list out all of them.
+
+```javascript
+import { ref, watchEffect } from 'vue'
+
+const a = ref(0);
+const b = ref(0);
+
+watchEffect(() => {
+	console.log(a.value, b.value)
+})
+```
+
+But different from `watch`. `watchEffect` will run the callback once from start before any state change, `watch` will only run the callback when the source is changed.
+
+Like `computed`, `watch` and `watchEffect` can be used in your own custom composables.
 
 <hr>
 <br>
